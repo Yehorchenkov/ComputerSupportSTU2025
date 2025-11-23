@@ -3465,6 +3465,102 @@ Then use <code>table()</code> to show how many objects fall into each category.<
 <p><strong>Your Task:</strong> Write and call <strong>your own</strong> reporting function based on your data.</p>
 </section>
 </section>
+<section id="task-5.-visualising-your-universe-base-r-ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="task-5.-visualising-your-universe-base-r-ggplot2">Task 5. Visualising Your Universe (Base R &amp; ggplot2)</h2>
+<p>You have found your data (Task 3) and built tools to analyse it (Task 4). Now, you must present your findings to customers.</p>
+<p>Your goal is to create four specific visualizations based on the real-world dataset you imported in Task 3.</p>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li><p>Use the dataset you found and cleaned in Task 3.</p></li>
+<li><p>Make sure <code>library(ggplot2)</code> is loaded.</p></li>
+<li><p><strong>Crucial:</strong> Every plot must have a <strong>Title</strong>, <strong>x-axis label</strong>, and <strong>y-axis label</strong> that make sense for your specific theme.</p></li>
+</ul>
+<section id="the-quick-sketch-base-r-histogram" class="level3">
+<h3 class="anchored" data-anchor-id="the-quick-sketch-base-r-histogram">5.1. The Quick Sketch (Base R Histogram)</h3>
+<p>Sometimes you need a quick look at the distribution of your data without loading heavy packages.</p>
+<ol type="1">
+<li><p>Choose one <strong>numeric variable</strong> from your dataset (e.g., <code>price</code>, <code>temperature</code>, <code>speed</code>).</p></li>
+<li><p>Use the <code>hist()</code> function from base R.</p></li>
+<li><p>Customise the <code>main</code> title, <code>xlab</code>, and the bar <code>col</code> (colour).</p></li>
+</ol>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace &#39;your_dataframe&#39; and &#39;numeric_column&#39; with your actual data</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(your_dataframe<span class="sc">$</span>numeric_column,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Distribution of [Your Variable]&quot;</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;[Your Units]&quot;</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">&quot;white&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="the-relationship-map-ggplot2-scatter-plot" class="level3">
+<h3 class="anchored" data-anchor-id="the-relationship-map-ggplot2-scatter-plot">5.2. The Relationship Map (ggplot2 Scatter Plot)</h3>
+<p>Now, let’s look for patterns using the industry-standard package, <strong>ggplot2</strong>.</p>
+<ol type="1">
+<li><p>Choose <strong>two numeric variables</strong> to see if they are correlated.</p></li>
+<li><p>Create a scatter plot using <code>geom_point()</code>.</p></li>
+<li><p>Add <code>geom_smooth()</code> to add a relationship between variables to the plot.</p></li>
+<li><p>Add <code>labs()</code> to rename your axes and title.</p></li>
+</ol>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> your_dataframe, <span class="fu">aes</span>(<span class="at">x =</span> numeric_var1, <span class="at">y =</span> numeric_var2)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="co"># alpha controls transparency</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="st">&quot;gray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;[Title: e.g., Population vs Size]&quot;</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Coloured by [Category Name]&quot;</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;[X Label]&quot;</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;[Y Label]&quot;</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;[Legend Title]&quot;</span>) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="the-comparison-ggplot2-boxplot" class="level3">
+<h3 class="anchored" data-anchor-id="the-comparison-ggplot2-boxplot">5.3. The Comparison (ggplot2 Boxplot)</h3>
+<ol start="3" type="1">
+<li>The Comparison (ggplot2 Boxplot)</li>
+</ol>
+<p>Boxplots are excellent for comparing groups. Let’s see how different categories in your universe perform.</p>
+<ol type="1">
+<li><p>Choose a <strong>categorical (or logical) variable</strong> for the X-axis (e.g., city, planet_type, species).</p></li>
+<li><p>Choose a <strong>numeric variable</strong> for the Y-axis (e.g., price, gravity, lifespan).</p></li>
+<li><p>Create a plot using <code>geom_boxplot()</code>.</p></li>
+<li><p><strong>Bonus:</strong> Use <code>fill</code> to colour the boxes by the same category.</p></li>
+</ol>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> your_dataframe, <span class="fu">aes</span>(<span class="at">x =</span> category_var, <span class="at">y =</span> numeric_var, <span class="at">fill =</span> category_var)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Comparison of [Variable] by [Category]&quot;</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;[Category Name]&quot;</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;[Numeric Variable]&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="co"># Hides legend if x-axis already shows categories</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="the-deep-dive-faceting-or-custom" class="level3">
+<h3 class="anchored" data-anchor-id="the-deep-dive-faceting-or-custom">5.4. The “Deep Dive” (Faceting or Custom)</h3>
+<p>The most powerful feature of <code>ggplot2</code> is faceting—creating small multiples of the same plot for different groups.</p>
+<ol type="1">
+<li><p>Create a plot (histogram, bar plot, or scatter plot).</p></li>
+<li><p>Use <code>facet_wrap(~ your_category_variable)</code> to split the plot into a separate panel for each group in your data.</p></li>
+<li><p>This is incredibly useful for comparing distinct groups (e.g., separate charts for each City or Year).</p></li>
+</ol>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: A histogram of prices, split by city</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> your_dataframe, <span class="fu">aes</span>(<span class="at">x =</span> numeric_var)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">15</span>, <span class="at">fill =</span> <span class="st">&quot;coral&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> category_var) <span class="sc">+</span> <span class="co"># The magic line that splits the plot</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribution of [Variable] across [Categories]&quot;</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;[Variable]&quot;</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Important:</strong> you could create your own custom plot instead of facet plot.</p>
+</section>
+<section id="final-step-exporting-saving-your-work" class="level3">
+<h3 class="anchored" data-anchor-id="final-step-exporting-saving-your-work">5.5. Final Step: Exporting (Saving Your Work)</h3>
+<p>A plot is useless if you can’t put it in a report.</p>
+<ol type="1">
+<li><p>Choose your favourite plot from the exercises above.</p></li>
+<li><p>Run the code to display it in R.</p></li>
+<li><p>Immediately run the following command to save it to your project folder:</p></li>
+</ol>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;my_universe_plot.png&quot;</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
 
 </main>
 <!-- /main column -->

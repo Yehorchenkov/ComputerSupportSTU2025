@@ -478,3 +478,128 @@ generate_report(my_data, "City_B_Name")
 ```
 
 **Your Task:** Write and call **your own** reporting function based on your data.
+
+## Task 5. Visualising Your Universe (Base R & ggplot2)
+
+You have found your data (Task 3) and built tools to analyse it (Task 4). Now, you must present your findings to customers.
+
+Your goal is to create four specific visualizations based on the real-world dataset you imported in Task 3.
+
+**Prerequisites:**
+
+  - Use the dataset you found and cleaned in Task 3.
+
+  - Make sure `library(ggplot2)` is loaded.
+
+  - **Crucial:** Every plot must have a **Title**, **x-axis label**, and **y-axis label** that make sense for your specific theme.
+
+### 5.1. The Quick Sketch (Base R Histogram)
+
+Sometimes you need a quick look at the distribution of your data without loading heavy packages.
+
+  1. Choose one **numeric variable** from your dataset (e.g., `price`, `temperature`, `speed`).
+
+  2. Use the `hist()` function from base R.
+
+  3. Customise the `main` title, `xlab`, and the bar `col` (colour).
+
+**Example:**
+
+```r
+# Replace 'your_dataframe' and 'numeric_column' with your actual data
+hist(your_dataframe$numeric_column,
+     main = "Distribution of [Your Variable]",
+     xlab = "[Your Units]",
+     col = "lightblue",
+     border = "white")
+```
+
+### 5.2. The Relationship Map (ggplot2 Scatter Plot)
+
+Now, let's look for patterns using the industry-standard package, **ggplot2**.
+
+  1. Choose **two numeric variables** to see if they are correlated.
+
+  2. Create a scatter plot using `geom_point()`.
+  
+  3. Add `geom_smooth()` to add a relationship between variables to the plot.
+
+  4. Add `labs()` to rename your axes and title.
+
+**Example:**
+
+```r
+ggplot(data = your_dataframe, aes(x = numeric_var1, y = numeric_var2)) +
+  geom_point(alpha = 0.7, size = 3, colour="blue") + # alpha controls transparency
+  geom_smooth("gray") +
+  labs(title = "[Title: e.g., Population vs Size]",
+       subtitle = "Coloured by [Category Name]",
+       x = "[X Label]",
+       y = "[Y Label]",
+       color = "[Legend Title]") +
+  theme_minimal()
+```
+
+### 5.3. The Comparison (ggplot2 Boxplot)
+
+3. The Comparison (ggplot2 Boxplot)
+
+Boxplots are excellent for comparing groups. Let's see how different categories in your universe perform.
+
+  1. Choose a **categorical (or logical) variable** for the X-axis (e.g., city, planet_type, species).
+
+  2. Choose a **numeric variable** for the Y-axis (e.g., price, gravity, lifespan).
+
+  3. Create a plot using `geom_boxplot()`.
+
+  4. **Bonus:** Use `fill` to colour the boxes by the same category.
+
+**Example:**
+
+```r
+ggplot(data = your_dataframe, aes(x = category_var, y = numeric_var, fill = category_var)) +
+  geom_boxplot() +
+  labs(title = "Comparison of [Variable] by [Category]",
+       x = "[Category Name]",
+       y = "[Numeric Variable]") +
+  theme_light() +
+  theme(legend.position = "none") # Hides legend if x-axis already shows categories
+```
+
+### 5.4. The "Deep Dive" (Faceting or Custom)
+
+The most powerful feature of `ggplot2` is faceting—creating small multiples of the same plot for different groups.
+
+  1. Create a plot (histogram, bar plot, or scatter plot).
+
+  2. Use `facet_wrap(~ your_category_variable)` to split the plot into a separate panel for each group in your data.
+
+  3. This is incredibly useful for comparing distinct groups (e.g., separate charts for each City or Year).
+
+**Example:**
+
+```r
+# Example: A histogram of prices, split by city
+ggplot(data = your_dataframe, aes(x = numeric_var)) +
+  geom_histogram(bins = 15, fill = "coral", color = "black") +
+  facet_wrap(~ category_var) + # The magic line that splits the plot
+  labs(title = "Distribution of [Variable] across [Categories]",
+       x = "[Variable]",
+       y = "Count")
+```
+
+**Important:** you could create your own custom plot instead of facet plot.
+
+### 5.5. Final Step: Exporting (Saving Your Work)
+
+A plot is useless if you can't put it in a report.
+
+  1. Choose your favourite plot from the exercises above.
+
+  2. Run the code to display it in R.
+
+  3. Immediately run the following command to save it to your project folder:
+
+```r
+ggsave("my_universe_plot.png", width = 8, height = 6)
+```
