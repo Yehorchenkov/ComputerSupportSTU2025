@@ -7,7 +7,7 @@ you can use [html preview](http://htmlpreview.github.io)
 
 [Direct link to practice](http://htmlpreview.github.io/?https://github.com/Yehorchenkov/ComputerSupportSTU2025/blob/main/practice/practical_task.html)
 
-[Direct link to questions](http://htmlpreview.github.io/?https://github.com/Yehorchenkov/ComputerSupportSTU2025/blob/main/Questions.html))
+[Direct link to questions](http://htmlpreview.github.io/?https://github.com/Yehorchenkov/ComputerSupportSTU2025/blob/main/Questions.html)
 
 ## References
 
